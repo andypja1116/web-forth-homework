@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>通讯录列表页面</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        function login(){
+            var admin = document.loginForm.admin.value;
+            var password=document.loginForm.password.value;
+            if(admin=="2018211480"&&password=="123456"){
+                alert("登录成功");
+                return true;
+            }
+            else{
+                alert("登录失败，请检查用户名和密码");
+                return false;
+            }
+        }
+    </script>
+</head>
+<body>
+<form name="loginForm" class="form-signin" role="form" method="post" th:action="@{/login/flag}">
+    <center>
+        <div>
+            <h2>
+                个人通讯录管理系统
+            </h2>
+            <p>
+                用户名为2018211480
+            </p>
+            <p>
+                密码为123456
+            </p>
+            <p>
+                用户名:<input name="admin"  type="text" placeholder="请输入用户名"/>
+            </p>
+            <p>
+                密&emsp;码:<input name="password" type="password" placeholder="请输入密码"/>
+            </p>
+            <p>
+                <button onclick="login()" type="submit">登录</button>
+            </p>
+        </div>
+    </center>
+</form>
+</body>
+</html>

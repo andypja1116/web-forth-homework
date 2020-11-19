@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>通讯录列表添加页面</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<form name="myform" onsubmit="return check()" th:action="@{/add/post}" method="post" th:object="${user}">
+    <table class="table table-hover table-bordered">
+        <tr>
+            <th>姓名</th>
+            <td><input type="text" name="" class="form-control" id="name" th:field="*{name}"/></td>
+        </tr>
+        <tr>
+            <th>电话</th>
+            <td><input type="text" name="" class="form-control" id="phone" onblur="checkNumber()" th:field="*{phone}"/></td>
+        </tr>
+        <tr>
+            <th>邮箱</th>
+            <td><input type="text" name="" class="form-control" id="email" onblur="checkEmail()" th:field="*{email}"/></td>
+        </tr>
+        <tr>
+            <th>住址</th>
+            <td><input type="text" name="" class="form-control" id="home" th:field="*{address}"/></td>
+        </tr>
+        <tr>
+            <th>QQ号</th>
+            <td><input type="text" name="" class="form-control" id="QQ" onblur="checkQQ()" th:field="*{qq}"/></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <center><input type="submit" value="提交" class="btn btn-primary" id="reset" /></center>
+            </td>
+        </tr>
+    </table>
+</form>
+
+<script type="text/javascript">
+    function checkNumber(){
+        var value = document.myform.phone.value;
+        var len = value.length;
+        for (var i=0; i<len; i++)
+        {
+            if (value.charAt(i)>"9" || value.charAt(i)<"0")
+            {
+                alert("电话号码中含有非数字字符");
+                break;
+                return false;
+            }
+        }
+        if(len!==11)
+        {
+            alert("电话号码的位数不正确");
+            return false;
+        }
+        return true;
+    }
+
+    function checkEmail(){
+        var value = document.myform.email.value;
+        var len = value.length;
+        var flag = 0;
+        for (var i=0; i<len; i++)
+        {
+            if (value.charAt(i)=="@")
+            {
+                flag=1;
+            }
+        }
+        if (flag == 0)
+        {
+            alert("邮箱格式不合法");
+            return false;
+        }
+        return true;
+    }
+
+    function checkQQ(){
+        var value = document.myform.QQ.value;
+        var len = value.length;
+        for (var i=0; i<len; i++)
+        {
+            if (value.charAt(i)>"9" || value.charAt(i)<"0")
+            {
+                alert("QQ号中含有非数字字符");
+                return false;
+                break;
+            }
+        }
+        return true;
+    }
+
+    function check()
+    {
+        if(checkQQ() && checkEmail() && checkNumber()){
+            alert("信息添加成功");
+            return true;
+        }
+        else{
+            alert("信息添加失败");
+            return false;
+        }
+    }
+</script>
+</body>
+</html>

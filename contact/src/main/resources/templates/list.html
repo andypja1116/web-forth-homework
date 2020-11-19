@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>通讯录列表页面</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<table class="table table-hover table-bordered" id="mytable">
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>姓名</th>
+        <th>电话</th>
+        <th>邮箱</th>
+        <th>住址</th>
+        <th>QQ号</th>
+        <th>修改</th>
+        <th>删除</th>
+    </tr>
+    <tr th:each="contact : ${user}">
+        <td th:text="${contact.current_id}"></td>
+        <td th:text="${contact.name}"></td>
+        <td th:text="${contact.phone}"></td>
+        <td th:text="${contact.email}"></td>
+        <td th:text="${contact.address}"></td>
+        <td th:text="${contact.qq}"></td>
+
+        <form th:action="@{'/list/update/'+${contact.current_id}}" method="get">
+            <td><input type="submit" name="" value="修改" class="btn btn-info" /></td>
+        </form>
+
+        <form th:action="@{'/list/del/'+${contact.current_id}}" method="post">
+            <td><input type="submit" name="" value="删除" class="btn btn-danger" /></td>
+        </form>
+    </tr>
+</table>
+<form th:action="@{/add}" method="get">
+    <center>
+        <input type="submit" value="添加" class="btn btn-success">
+    </center>
+</form>
+</body>
+</html>
